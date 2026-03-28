@@ -12,6 +12,10 @@ public class ConfigManager {
 	private static Properties prop = new Properties();
 	private static String path = "config/config.properties";
 	private static String env;
+	
+	private ConfigManager() {
+		
+	}
 
 	static {
 		
