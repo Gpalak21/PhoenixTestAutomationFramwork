@@ -54,6 +54,9 @@ jobs:
         name: Surefire Report
         path: target/surefire-reports/
         retention-days: 10
+    
+    - name: Delete target folder 
+      run: rm -rf target/surefire-reports
         
 
   
