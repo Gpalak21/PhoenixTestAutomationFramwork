@@ -1,5 +1,8 @@
+title = "gitleaks config"
+
 [allowlist]
+description = "ignore test reports"
 paths = [
-  '''target/.*''',
-  '''test-output/.*'''
+  "target/.*",
+  "test-output/.*"
 ]
