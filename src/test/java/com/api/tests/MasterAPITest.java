@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
+import groovyjarjarpicocli.CommandLine.Spec;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -19,19 +22,11 @@ public class MasterAPITest {
 	@Test
 	public void verifyMasterAPIRequest() throws IOException {
 		given()
-			.baseUri(getProperty("BASE_URI"))
-			.header("Authorization",getToken(FD))
-			.contentType("")
-			.accept(ContentType.JSON)
-			.log().uri()
-			.log().method()
-			.log().headers()
+			.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 			.post("/master")
 		.then()
-			.log().all()
-			.statusCode(200)
-			.time(lessThan(1000L))
+			.spec(SpecUtil.responseSpec_OK())
 			.body("message",equalTo("Success"))
 			.body("data", notNullValue())
 			.body("data", hasKey("mst_oem"))
@@ -50,18 +45,11 @@ public class MasterAPITest {
 	@Test
 	public void invalidToken_masterAPIRequest() throws IOException {
 		given()
-		.baseUri(getProperty("BASE_URI"))
-	
-		.contentType("")
-		.accept(ContentType.JSON)
-		.log().uri()
-		.log().method()
-		.log().headers()
+		.spec(SpecUtil.requestSpec())
 	.when()
 		.post("/master")
 	.then()
-		.log().all()
-		.statusCode(401);
+		.spec(SpecUtil.responseSpec_TEXT(401));
 		
 	}
 
