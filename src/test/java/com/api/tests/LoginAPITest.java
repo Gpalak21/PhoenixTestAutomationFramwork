@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import org.testng.annotations.Test;
 
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 public class LoginAPITest {
 	
