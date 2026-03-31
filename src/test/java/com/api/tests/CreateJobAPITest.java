@@ -11,6 +11,7 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.api.utils.AuthTokenProvider;
+import static com.api.utils.DateTimeUtility.*;
 import com.api.utils.SpecUtil;
 
 import static com.api.utils.ConfigManager.*;
@@ -21,6 +22,8 @@ import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import static io.restassured.RestAssured.*;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +34,9 @@ public class CreateJobAPITest {
 	@Test
 	public void createJobAPITest() throws IOException {
 		
-
 		Customer customer = new Customer("palak", "Gupta", "7983945132","" , "gpalakagra@gmail.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("D 404", "sunshine", "Kamla Nagar", "Perfect Classes", "Tej Nagar", "282005", "India", "Uttar pradesh");
-		CustomerProduct customerProduct = new CustomerProduct("2026-03-02T18:30:00.000Z", "44567329913875", "44567329913875", "44567329913875", "2026-03-02T18:30:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "44997329913875", "44997329913875", "44997329913875", getTimeWithDaysAgo(10), 1, 1);
 		Problems problems = new Problems(1, "Battery Issue");
 		List<Problems> problemList = new ArrayList<Problems>();
 		problemList.add(problems);
