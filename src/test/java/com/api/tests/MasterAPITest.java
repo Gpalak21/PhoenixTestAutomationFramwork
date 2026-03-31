@@ -1,32 +1,31 @@
 package com.api.tests;
 
 import static com.api.constant.Role.FD;
-import static com.api.utils.AuthTokenProvider.getToken;
-import static com.api.utils.ConfigManager.getProperty;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
-
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.IOException;
 
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
-import groovyjarjarpicocli.CommandLine.Spec;
-import io.restassured.http.ContentType;
-import io.restassured.module.jsv.JsonSchemaValidator;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class MasterAPITest {
 	
-	@Test
+	@Test(description="Verify if the master api response is shown correctly",groups= {"api","regression","smoke"})
 	public void verifyMasterAPIRequest() throws IOException {
 		given()
-			.spec(SpecUtil.requestSpecWithAuth(FD))
+			.spec(requestSpecWithAuth(FD))
 		.when()
 			.post("/master")
 		.then()
-			.spec(SpecUtil.responseSpec_OK())
+			.spec(responseSpec_OK())
 			.body("message",equalTo("Success"))
 			.body("data", notNullValue())
 			.body("data", hasKey("mst_oem"))
@@ -36,20 +35,20 @@ public class MasterAPITest {
 			.body("data.mst_model.size()", equalTo(3))
 			.body("data.mst_oem.id", everyItem(notNullValue()))
 			.body("data.mst_oem.name", everyItem(notNullValue()))
-			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
+			.body(matchesJsonSchemaInClasspath("response-schema/MasterAPIResponseSchema.json"));
 			
 			
 	}
 	
 	
-	@Test
+	@Test(description="Verify if the master api response is shown correctly for invalid token",groups= {"api","regression","smoke","negative"})
 	public void invalidToken_masterAPIRequest() throws IOException {
 		given()
-		.spec(SpecUtil.requestSpec())
+		.spec(requestSpec())
 	.when()
 		.post("/master")
 	.then()
-		.spec(SpecUtil.responseSpec_TEXT(401));
+		.spec(responseSpec_TEXT(401));
 		
 	}
 

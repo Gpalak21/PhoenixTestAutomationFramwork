@@ -9,18 +9,24 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.io.IOException;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredentials;
 
 public class LoginAPITest {
 	
+	UserCredentials userCredentials;
 	
-	@Test
+	@BeforeMethod
+	public void setup() {
+		userCredentials = new UserCredentials("iamfd", "password");
+	}
+	
+	
+	@Test(description="Verifying if login API is working for user FD", groups= {"api","regression","smoke"})
 	public void loginAPITest() throws IOException {
-		
-		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
-		
+			
 		given()
 			.baseUri(getProperty("BASE_URI"))
 			.spec(requestSpec(userCredentials))
