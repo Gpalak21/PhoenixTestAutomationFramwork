@@ -5,7 +5,7 @@ import java.io.IOException;
 import static org.hamcrest.Matchers.*;
 
 import com.api.constant.Role;
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -61,6 +61,22 @@ public class SpecUtil {
 		.log(LogDetail.BODY)
 		.build();
 		return rs;
+	}
+	
+	public static RequestSpecification requestSpecWithAuth(Role role, Object payload) throws IOException {
+		RequestSpecification rs=new RequestSpecBuilder()
+		.setBaseUri(getProperty("BASE_URI"))
+		.setContentType(ContentType.JSON)
+		.setAccept(ContentType.JSON)
+		.addHeader("Authorization", AuthTokenProvider.getToken(role))
+		.setBody(payload)
+		.log(LogDetail.URI)
+		.log(LogDetail.METHOD)
+		.log(LogDetail.HEADERS)
+		.log(LogDetail.BODY)
+		.build();
+		return rs;
+	
 	}
 	
 	public static ResponseSpecification responseSpec_OK() {
