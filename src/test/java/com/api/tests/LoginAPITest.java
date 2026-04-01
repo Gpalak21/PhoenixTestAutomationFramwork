@@ -16,7 +16,7 @@ import com.api.request.model.UserCredentials;
 
 public class LoginAPITest {
 	
-	//Palak Gupta
+	//Created by Palak Gupta
 	
 	UserCredentials userCredentials;
 	
