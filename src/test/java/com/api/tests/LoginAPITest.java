@@ -16,13 +16,14 @@ import com.api.request.model.UserCredentials;
 
 public class LoginAPITest {
 	
+	//Created by Palak Gupta
+	
 	UserCredentials userCredentials;
 	
 	@BeforeMethod
 	public void setup() {
 		userCredentials = new UserCredentials("iamfd", "password");
 	}
-	
 	
 	@Test(description="Verifying if login API is working for user FD", groups= {"api","regression","smoke"})
 	public void loginAPITest() throws IOException {
