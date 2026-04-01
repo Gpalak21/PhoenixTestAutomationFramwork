@@ -51,7 +51,7 @@ jobs:
       id: default
       run: |
             echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || 'testng.xml' }}" >> $GITHUB_OUTPUT
-            echo "env=${{ github.event.inputs.env || 'qa' }}" >> $GITHUB_OUPUT
+            echo "env=${{ github.event.inputs.env || 'qa' }}" >> $GITHUB_OUTPUT
 
 
     
