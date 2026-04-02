@@ -9,9 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvException;
 
-public class ReadCSVFile {
+public class ReadCSVFile_MapToPOJO {
 
 	public static void main(String[] args) throws IOException, CsvException {
 		
@@ -19,11 +21,13 @@ public class ReadCSVFile {
 		InputStreamReader isr = new InputStreamReader(is);
 		CSVReader csvReader = new CSVReader(isr);
 		
-		List<String[]> dataList=csvReader.readAll();
+		CsvToBean<UserPOJO> csvToBean = new CsvToBeanBuilder(csvReader)
+				.withType(UserPOJO.class)
+				.withIgnoreEmptyLine(true)
+				.build();
 		
-		for(String[] dataArray:dataList) {
-			System.out.println(Arrays.toString(dataArray));
-		}
+		List<UserPOJO> dataList=csvToBean.parse();
+		System.out.println(dataList.get(0).getPassword());
 		
 
 	}
