@@ -9,12 +9,6 @@ public class UserPOJO {
 		
 	}
 
-	public UserPOJO(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
-
 	public String getUsername() {
 		return username;
 	}
