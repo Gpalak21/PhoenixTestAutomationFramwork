@@ -15,6 +15,7 @@ public enum Problem {
 	 SOFTWARE_BOOTING_ISSUE(12),
 	 HEAD_PHONE_JACK_NOT_WORKING(13);
 	
+	
 	int code;
 	
 	Problem(int code){
