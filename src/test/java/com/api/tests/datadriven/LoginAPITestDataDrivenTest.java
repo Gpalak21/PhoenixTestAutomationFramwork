@@ -20,7 +20,7 @@ public class LoginAPITestDataDrivenTest {
 	
 	
 	@Test(description="Verifying if login API is working for user FD", 
-			groups= {"api","regression","smoke"},
+			groups= {"api","regression","smoke","csv"},
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "loginAPIDataProvider"
 			)

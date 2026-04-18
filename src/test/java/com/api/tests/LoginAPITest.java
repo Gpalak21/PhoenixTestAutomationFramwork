@@ -29,7 +29,6 @@ public class LoginAPITest {
 	public void loginAPITest() throws IOException {
 			
 		given()
-			.baseUri(getProperty("BASE_URI"))
 			.spec(requestSpec(userCredentials))
 		.when()
 			.post("/login")

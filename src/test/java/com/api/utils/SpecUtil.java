@@ -1,11 +1,11 @@
 package com.api.utils;
 
+import static com.api.utils.ConfigManager.getProperty;
+import static org.hamcrest.Matchers.lessThan;
+
 import java.io.IOException;
 
-import static org.hamcrest.Matchers.*;
-
 import com.api.constant.Role;
-import com.api.request.model.UserCredentials;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -13,8 +13,6 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-
-import static com.api.utils.ConfigManager.*;
 
 public class SpecUtil {
 	
