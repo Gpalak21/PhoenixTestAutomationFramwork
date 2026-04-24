@@ -24,10 +24,10 @@ public class LoginAPIExcelDataDrivenTest {
 			dataProviderClass = com.dataproviders.DataProviderUtils.class,
 			dataProvider = "LoginAPIExcelDataProvider"
 			)
-	public void loginAPITest(UserCredentials userCreds) throws IOException{
+	public void loginAPITest(UserPOJO userPojo) throws IOException{
 			
 		given()
-			.spec(requestSpec(userCreds))
+			.spec(requestSpec(userPojo))
 		.when()
 			.post("/login")
 		.then()
