@@ -23,12 +23,21 @@ public class CreateJobBeanMapper {
 		int mstWarrentyStatus=Integer.parseInt(bean.getMst_warrenty_status_id());
 		int mstOemId=Integer.parseInt(bean.getMst_oem_id());
 		
+		String mobileAlt = bean.getCustomer__mobile_number_alt();
+		String emailAlt = bean.getCustomer__email_id_alt();
+		if ((mobileAlt == null || mobileAlt.trim().isEmpty() )&& (emailAlt==null || emailAlt.trim().isEmpty())) {
+		    mobileAlt = "";
+		    emailAlt="";
+		}
+		
+		
+		
 		Customer customer = new Customer(bean.getCustomer__first_name(), 
 				bean.getCustomer__last_name(), 
 				bean.getCustomer__mobile_number(), 
-				bean.getCustomer__mobile_number_alt(), 
+				mobileAlt, 
 				bean.getCustomer__email_id(), 
-				bean.getCustomer__email_id_alt()
+				emailAlt
 				);
 		
 		CustomerAddress customerAddress = new CustomerAddress(bean.getCustomer_address__flat_number(), 
