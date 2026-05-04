@@ -32,9 +32,11 @@ import com.api.request.model.Problems;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
 import com.database.dao.CustomerProductDao;
+import com.database.dao.MapJobProblemDao;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.CustomerProductDBModel;
+import com.database.model.MapJobProblemDBModel;
 
 import io.restassured.response.Response;
 
@@ -49,7 +51,7 @@ public class CreateJobAPIWithDBValidationTest {
 	public void setup() {
 		customer= new Customer("palak", "Gupta", "7983945132","" , "gpalakagra@gmail.com", "");
 		customerAddress = new CustomerAddress("D 404", "sunshine", "Kamla Nagar", "Perfect Classes", "Tej Nagar", "282005", "India", "Uttar pradesh");
-		 customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "93102719317545", "93102719317545", "93102719317545", getTimeWithDaysAgo(10), 
+		 customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "93502819387545", "93502819387545", "93502819387545", getTimeWithDaysAgo(10), 
 				Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 		Problems problems = new Problems(Problem.POOR_BATTERY_LIFE.getCode(), "Battery Issue");
 		List<Problems> problemList = new ArrayList<Problems>();
@@ -101,7 +103,15 @@ public class CreateJobAPIWithDBValidationTest {
 	
 	int productId=response.then().extract().body().jsonPath().getInt("data.tr_customer_product_id");
 	
-	CustomerProductDBModel customerProductFromDB = CustomerProductDao.getCustomerProductInfoFromDB(productId);
+	
+	
+	int tr_job_head_id=response.then().extract().body().jsonPath().getInt("data.id");
+	MapJobProblemDBModel jobDataFromDB = MapJobProblemDao.getProblemDetails(tr_job_head_id);
+	
+	Assert.assertEquals(jobDataFromDB.getMst_problem_id(), createJobPayload.problems().get(0).id());
+	Assert.assertEquals(jobDataFromDB.getRemark(), createJobPayload.problems().get(0).remark());
+	
+CustomerProductDBModel customerProductFromDB = CustomerProductDao.getCustomerProductInfoFromDB(productId);
 	
 	Assert.assertEquals(customerProductFromDB.getDop(), customerProduct.dop());
 	Assert.assertEquals(customerProductFromDB.getSerial_number(), customerProduct.serial_number());

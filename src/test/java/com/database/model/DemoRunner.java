@@ -1,15 +1,16 @@
 package com.database.model;
 
 import com.database.dao.CustomerProductDao;
+import com.database.dao.MapJobProblemDao;
 
 public class DemoRunner {
 
 	public static void main(String[] args) {
 		
-		CustomerProductDBModel customerProductDBModel = CustomerProductDao.getCustomerProductInfoFromDB(270098);
+		MapJobProblemDBModel mapJobProblemDBModel=MapJobProblemDao.getProblemDetails(270435);
 		
 		
-		System.out.println(customerProductDBModel);
+		System.out.println(mapJobProblemDBModel);
 
 	}
 
